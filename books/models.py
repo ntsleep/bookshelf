@@ -5,9 +5,9 @@ class Author(models.Model):
     name_orig = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
     surname_orig = models.CharField(max_length=200)
-    birth_date = models.DateField()
-    biography = models.TextField()
-    created_at = models.DateTimeField('date published')
+    birth_date = models.DateField(null=True, blank=True)
+    biography = models.TextField(blank=True)
+    created_at = models.DateTimeField('date published', auto_now_add=True)
     
     def __str__(self):
         return "{} {}".format(self.name, self.surname)
@@ -15,24 +15,24 @@ class Author(models.Model):
 class Series(models.Model):
     title = models.CharField(max_length=255)
     title_orig = models.CharField(max_length=255)
-    teaser = models.CharField(max_length=500)
-    description = models.TextField()
-    pub_date = models.DateField()
-    created_at = models.DateTimeField('date published')
+    teaser = models.CharField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
+    pub_date = models.DateField(null=True, blank=True)
+    created_at = models.DateTimeField('date published', auto_now_add=True)
     
     def __str__(self):
         return self.title
 
 class Book(models.Model):
-    authors = models.ManyToManyField(Author)
-    series = models.ManyToManyField(Series)
+    authors = models.ManyToManyField(Author, blank=True)
+    series = models.ManyToManyField(Series, blank=True)
     title = models.CharField(max_length=255)
     title_orig = models.CharField(max_length=255)
-    teaser = models.CharField(max_length=500)
-    description = models.TextField()
-    pub_date = models.DateField()
-    isbn = models.CharField(max_length=20)
-    created_at = models.DateTimeField('date published')
+    teaser = models.CharField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
+    pub_date = models.DateField(null=True, blank=True)
+    isbn = models.CharField(max_length=20, blank=True)
+    created_at = models.DateTimeField('date published', auto_now_add=True)
     
     def __str__(self):
         return self.title
