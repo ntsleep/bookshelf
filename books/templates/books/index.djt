@@ -1,9 +1,39 @@
-{% if latest_books_list %}
-    <ul>
-    {% for book in latest_books_list %}
-        <li><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No books are available.</p>
-{% endif %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<div class="container">  
+
+    <h2>New added books</h2>
+
+    {% if latest_books_list %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Book</th>
+                    <th>Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in latest_books_list %}
+                    <tr>
+                        <td><a href="/books/{{ book.id }}/">Author</a></td>
+                        <td><a href="/books/{{ book.id }}/">{{ book.title }}</a></td>
+                        <td><a href="/books/{{ book.id }}/">{{ book.created_at }}</a></td>
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+    {% else %}
+        <p>No books are available.</p>
+    {% endif %}
+</div>
+
+

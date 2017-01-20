@@ -1,14 +1,28 @@
-<h1>{{ book.title }}</h1>
+{# Load the tag library #}
+{% load bootstrap3 %}
 
-{% for author in book.authors.all %}
-    {{ author }}, 
-{% endfor %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-<br />
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 
-{% for series in book.series.all %}
-    {{ series }}, 
-{% endfor %}
+<div class="container">  
 
-<p>{{ book.description }}</p>
+    <h1>{{ book.title }}</h1>
 
+    <p>
+        {% for author in book.authors.all %}
+            {{ author }}, 
+        {% endfor %}
+    </p>
+
+    <p>
+        {% for series in book.series.all %}
+            {{ series }}, 
+        {% endfor %}
+    </p>
+
+    <p>{{ book.description }}</p>
+</div><!-- /.container -->
