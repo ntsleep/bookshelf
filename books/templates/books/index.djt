@@ -18,14 +18,16 @@
                 <tr>
                     <th>Author</th>
                     <th>Book</th>
+                    <th>Series</th>
                     <th>Added</th>
                 </tr>
             </thead>
             <tbody>
                 {% for book in latest_books_list %}
                     <tr>
-                        <td><a href="/books/{{ book.id }}/">Author</a></td>
+                        <td><a href="/books/{{ book.id }}/">{{ book.authors.all|join:", " }}</a></td>
                         <td><a href="/books/{{ book.id }}/">{{ book.title }}</a></td>
+                        <td><a href="/books/{{ book.id }}/">{{ book.series.all|join:", " }}</a></td>
                         <td><a href="/books/{{ book.id }}/">{{ book.created_at }}</a></td>
                     </tr>
                 {% endfor %}
