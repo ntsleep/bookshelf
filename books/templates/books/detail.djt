@@ -12,9 +12,10 @@
 
     <h1>{{ book.title }}</h1>
  
-    {{ book.authors.all|join:", " }}
+    <p>{{ book.authors.all|join:", " }}</p>
        
-    {{ book.series.all|join:", " }}
+    <p>{{ book.series.all|join:", " }}</p>
 
+    <p>{{ book.teaser }}</p>
     <p>{{ book.description }}</p>
 </div><!-- /.container -->
