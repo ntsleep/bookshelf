@@ -1,7 +1,10 @@
+import collections
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+
 
 from .models import Book, Author
 
@@ -36,7 +39,16 @@ class AuthorView(generic.DetailView):
         # Call the base implementation first to get a context
         context = super(AuthorView, self).get_context_data(**kwargs)
         author = super(AuthorView, self).get_object()
-        
-        context['books'] = Book.objects.filter(authors__id=author.id)
+        books = Book.objects.filter(authors__id=author.id)
+        context['grouped_books'] = self.group_books(books)
         return context
+    
+    def group_books(self, books):
+        grouped_books = collections.defaultdict(dict)
+        
+        for book in books:
+            for series in book.series.all():
+                grouped_books[series.title] = {book}
+                
+        return dict(grouped_books)
 

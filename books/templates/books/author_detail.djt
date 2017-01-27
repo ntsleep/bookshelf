@@ -12,36 +12,24 @@
 
     <h1>{{ author }}</h1>
  
-    {# {{ book.authors.all|join:", " }}#}
-       
-    {#{{ book.series.all|join:", " }} #}
-
     <p>{{ author.biography }}</p>
 {#    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>#}
-    
-    
-    
-    {% if books %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Book</th>
-                    <th>Series</th>
-                    <th>Added</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
-                    <tr>
-                        <td><a href="/books/{{ book.id }}/">{{ book.title }}</a></td>
-                        <td><a href="/books/{{ book.id }}/">{{ book.series.all|join:", " }}</a></td>
-                        <td><a href="/books/{{ book.id }}/">{{ book.created_at }}</a></td>
-                    </tr>
-                {% endfor %}
-            <tbody>
-        </table>
+   
+    <h3>Books:</h3>
+    {% if grouped_books %}
+        <ul class="list-group">
+            {% for group, books in grouped_books.items %}
+                <li class="list-group-item">{{ group }}
+                    <ul class="list-group">
+                        {% for book in books %}
+                            <li class="list-group-item"><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <p>No books are available.</p>
+        <p>No series are available.</p>
     {% endif %}
     
 </div><!-- /.container -->
