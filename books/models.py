@@ -8,7 +8,8 @@ class Author(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     biography = models.TextField(blank=True)
     created_at = models.DateTimeField('date published', auto_now_add=True)
-    
+    pass
+
     def __str__(self):
         return "{} {}".format(self.name, self.surname)
 
@@ -19,13 +20,14 @@ class Series(models.Model):
     description = models.TextField(blank=True)
     pub_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField('date published', auto_now_add=True)
-    
+    pass
+
     def __str__(self):
         return self.title
 
 class Book(models.Model):
-    authors = models.ManyToManyField(Author, blank=True)
-    series = models.ManyToManyField(Series, blank=True)
+    authors = models.ManyToManyField(Author, blank=True, related_name='books')
+    series = models.ManyToManyField(Series, blank=True, related_name='books')
     title = models.CharField(max_length=255)
     title_orig = models.CharField(max_length=255)
     teaser = models.CharField(max_length=500, blank=True)
