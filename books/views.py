@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 
-from .models import Book
+from .models import Book, Author
 
 
 class IndexView(generic.ListView):
@@ -24,3 +24,19 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Book.objects
+    
+class AuthorView(generic.DetailView):
+    model = Author
+    template_name = 'books/author_detail.djt'
+    
+    def get_queryset(self):
+        return Author.objects
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(AuthorView, self).get_context_data(**kwargs)
+        author = super(AuthorView, self).get_object()
+        
+        context['books'] = Book.objects.filter(authors__id=author.id)
+        return context
+
