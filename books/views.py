@@ -28,6 +28,16 @@ class DetailView(generic.DetailView):
         """
         return Book.objects
     
+    
+class AuthorsListView(generic.ListView):
+    template_name = 'books/authors_list.djt'
+    context_object_name = 'authors_list'
+
+    def get_queryset(self):
+        """Return the last five published books."""
+        return Author.objects.order_by('-created_at')
+  
+    
 class AuthorView(generic.DetailView):
     model = Author
     template_name = 'books/author_detail.djt'
