@@ -1,13 +1,6 @@
-{# Load the tag library #}
-{% load bootstrap3 %}
+{% extends 'base.djt' %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
+{% block content %}
 <div class="container">  
 
     <h1>{{ author }}</h1>
@@ -33,3 +26,4 @@
     {% endif %}
     
 </div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,35 @@
+{% load static %}<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Default Title{% endblock %}</title>
+        {# Load the tag library #}
+        {% load bootstrap3 %}
+
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+    
+        <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    </head>
+    <body>
+        <header>
+            ...
+        </header>
+        
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            ...
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+        {% block javascript %}{% endblock %}
+    </body>
+</html>
+
