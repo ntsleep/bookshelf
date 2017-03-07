@@ -1,15 +1,23 @@
 {% extends 'base.djt' %}
 
 {% block content %}
-<div class="container">  
-    
-    <h1>{{ book.title }}</h1>
- 
-    <p>{{ book.authors.all|join:", " }}</p>
-       
-    <p>{{ book.series.all|join:", " }}</p>
+    <div class="container">  
+        <h1>{{ book.title }}</h1>
+        <a href="#" id="read">Read</a>
 
-    <p>{{ book.teaser }}</p>
-    <p>{{ book.description }}</p>
-</div><!-- /.container -->
+        <p>{{ book.authors.all|join:", " }}</p>
+
+        <p>{{ book.series.all|join:", " }}</p>
+
+        <p>{{ book.teaser }}</p>
+        <p>{{ book.description }}</p>
+    </div><!-- /.container -->
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $("#read").on('click', function () {
+            console.log($(this));
+        });
+    </script>
 {% endblock %}

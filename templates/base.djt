@@ -4,21 +4,24 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}Default Title{% endblock %}</title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+
         {# Load the tag library #}
         {% load bootstrap3 %}
 
         {# Load CSS and JavaScript #}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
-        {# Display django.contrib.messages as Bootstrap alerts #}
-        {% bootstrap_messages %}
-    
+        
         <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
     </head>
     <body>
         <header>
             ...
         </header>
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
         
         <main>
             {% block content %}
@@ -27,8 +30,6 @@
         <footer>
             ...
         </footer>
-        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-        <script src="{% static 'js/app.js' %}"></script>
         {% block javascript %}{% endblock %}
     </body>
 </html>
