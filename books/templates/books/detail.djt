@@ -3,7 +3,9 @@
 {% block content %}
     <div class="container">  
         <h1>{{ book.title }}</h1>
-        <a href="#" id="read">Read</a>
+        
+        <button type="button" class="btn btn-success" data-book-id="{{ book.id }}" id="read">Read</button>
+
 
         <p>{{ book.authors.all|join:", " }}</p>
 
@@ -17,7 +19,21 @@
 {% block javascript %}
     <script>
         $("#read").on('click', function () {
-            console.log($(this));
+            console.log($(this).data('book-id'));
+            
+
+            $.ajax({
+                url: '{% url 'shelf:mark_read' book.id %}',
+                data: {
+                    //'username': username
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        console.log("You marked the book as read.");
+                    }
+                }
+            });
         });
     </script>
 {% endblock %}

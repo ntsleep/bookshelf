@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^books/', include('books.urls')),
+    url(r'^books/', include('books.urls', namespace="books")),
+    url(r'^shelf/', include('shelf.urls', namespace="shelf")),
     url(r'^admin/', admin.site.urls),
 ]
