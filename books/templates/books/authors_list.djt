@@ -17,9 +17,9 @@
             <tbody>
                 {% for author in authors_list %}
                     <tr>
-                        <td><a href="{% url 'author_detail' author.id %}">{{ author }}</a></td>
-                        <td><a href="{% url 'author_detail' author.id %}">{{ author.name_orig }} {{ author.surname_orig }}</a></td>
-                        <td><a href="{% url 'author_detail' author.id %}">{{ author.created_at }}</a></td>
+                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author }}</a></td>
+                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author.name_orig }} {{ author.surname_orig }}</a></td>
+                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author.created_at }}</a></td>
                     </tr>
                 {% endfor %}
             <tbody>
