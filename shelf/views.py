@@ -23,3 +23,24 @@ def mark_read(request, book_id):
     }
     
     return JsonResponse(data)
+
+def mark(request):
+    
+    book = Book.objects.get(pk = request.POST['book_id'])
+    current_user = request.user
+
+    shelf, created = Shelf.objects.get_or_create(
+        user = current_user,
+        book = book,
+        action = request.POST['action'],
+        defaults={'date': request.POST['date']}
+    )
+    
+    data = {
+        'shelf' : shelf.id,
+        'new' : created,
+        'user' : "{}".format(current_user.username),
+        'success' : 1 
+    }
+    
+    return JsonResponse(data)

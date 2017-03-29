@@ -4,8 +4,20 @@
     <div class="container">  
         <h1>{{ book.title }}</h1>
         
-        <button type="button" class="btn btn-success" data-book-id="{{ book.id }}" id="read">Read</button>
-
+        <div class="popover-markup">
+            <a href="#" class="trigger btn btn-success">Read</a>
+            <div class="content hide">
+                <div class="row">
+                    <div class='col-sm-12'>
+                        <input type="hidden" class="datetimepicker" />    
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-success btn-block" data-book-id="{{ book.id }}" id="read">Submit</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
 
         <p>{{ book.authors.all|join:", " }}</p>
 
@@ -18,22 +30,42 @@
 
 {% block javascript %}
     <script>
-        $("#read").on('click', function () {
-            console.log($(this).data('book-id'));
-            
-
+        
+        $('.trigger').popover({
+            html: true,
+            placement: function(context, source) {
+                var self = this;
+                setTimeout(function() { 
+                    self.$arrow.css('left', 50);
+                }, 0);
+                return 'auto bottom';
+            },
+            content: function() {
+              return $(this).parent().find('.content').html();
+            },
+        }).on('shown.bs.popover', function() {
+            $('.popover .datetimepicker').datetimepicker({
+                inline: true,
+                format: 'YYYY-MM-DD'
+            });
+        }).parent().delegate('#read', 'click', function() {
             $.ajax({
-                url: '{% url 'shelf:mark_read' book.id %}',
+                url: '{% url 'shelf:mark' %}',
+                type: 'POST',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 data: {
-                    //'username': username
+                    'book_id' : {{ book.id }},
+                    'action' : 'read',
+                    'date': $('.datetimepicker').val()
                 },
                 dataType: 'json',
                 success: function (data) {
                     if (data.success) {
-                        console.log("You marked the book as read.");
+                        $('.trigger').popover('hide');
                     }
                 }
             });
         });
+
     </script>
 {% endblock %}

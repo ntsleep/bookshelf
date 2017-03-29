@@ -4,9 +4,9 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}Default Title{% endblock %}</title>
+        
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-        <script src="{% static 'js/app.js' %}"></script>
-
+        
         {# Load the tag library #}
         {% load bootstrap3 %}
 
@@ -14,11 +14,16 @@
         {% bootstrap_css %}
         {% bootstrap_javascript %}
         
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
     </head>
     <body>
         <header>
-            ...
+            
         </header>
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
@@ -28,7 +33,7 @@
             {% endblock %}
         </main>
         <footer>
-            ...
+            
         </footer>
         {% block javascript %}{% endblock %}
     </body>
