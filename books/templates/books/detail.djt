@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">  
         <h1>{{ book.title }}</h1>
-        
+        <div id="alert_placeholder"></div>
         <div class="popover-markup">
             <a href="#" class="trigger btn btn-success">Read</a>
             <div class="content hide">
@@ -30,7 +30,7 @@
 
 {% block javascript %}
     <script>
-        
+    $(document).ready(function () {    
         $('.trigger').popover({
             html: true,
             placement: function(context, source) {
@@ -62,10 +62,15 @@
                 success: function (data) {
                     if (data.success) {
                         $('.trigger').popover('hide');
+                        showAlert('The book successfully marked as read');
                     }
-                }
+                },
+                error: function (data) {
+                    $('.trigger').popover('hide');
+                    showAlert('Something went wrong', 'danger');
+                }       
             });
         });
-
+    });
     </script>
 {% endblock %}
