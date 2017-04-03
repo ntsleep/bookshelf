@@ -78,7 +78,10 @@
                         showAlert('The book successfully marked as read');
                     } else if (data.message) {
                         $('.popover-trigger').popover('hide');
-                        showAlert(data.message, 'danger');
+                        $.each(data.message, function(index, value) {
+                            showAlert(value, 'danger');
+                        });
+                        
                     }
                 },
                 error: function (data) {

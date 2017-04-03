@@ -1,5 +1,6 @@
 from shelf.models import Shelf
 from shelf.models import ACTION_CHOICES
+from shelf.forms import MarkBookForm
 from books.models import Book
 from django.http import JsonResponse
 import datetime
@@ -27,8 +28,10 @@ def mark_read(request, book_id):
 
 def mark(request):
     
-    if request.POST['action'] not in ACTION_CHOICES:
-        return JsonResponse({'error' : 1, 'message' : 'Invalid action'})
+    form = MarkBookForm(request.POST)
+    
+    if not form.is_valid():
+        return JsonResponse({'error' : 1, 'message' : dict(form.errors.items())})
     
     book = Book.objects.get(pk = request.POST['book_id'])
     current_user = request.user
