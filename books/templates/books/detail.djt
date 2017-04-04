@@ -4,7 +4,7 @@
     <div class="container">  
         <h1>{{ book.title }}</h1>
         <div id="alert_placeholder"></div>
-        <div class="popover-markup" data-book-id="{{ book.id }}">
+        <div class="popover-markup buttonset" data-book-id="{{ book.id }}">
             <a href="#" class="direct-action btn btn-success" data-action="want-to-read" data-action-status="off">Want to read</a>
             <a href="#" class="direct-action btn btn-success" data-action="currently-reading" data-action-status="off">Currently reading</a>
             <a href="#" class="popover-trigger btn btn-success" data-action="read" data-action-status="off">Read</a>
@@ -34,7 +34,7 @@
 
 {% block javascript %}
     <script>
-    $(document).ready(function () {    
+    $(document).ready(function () {  
         $('.popover-trigger').popover({
             html: true,
             placement: function(context, source) {
@@ -54,27 +54,28 @@
             });
         }).parent().delegate('.submit', 'click', function() {
             var button = $(this).parents('.popover-markup').find('.popover-trigger');
-            markBook(button.data('action'));
+            markBook(button);
         });
         
         $('.direct-action').on('click', function() {
-            markBook($(this).data('action'));
-        })
+            markBook($(this));
+        });
         
-        function markBook(action) {
+        function markBook(button) {
             $.ajax({
                 url: '{% url 'shelf:mark' %}',
                 type: 'POST',
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 data: {
-                    'book_id' : {{ book.id }},
-                    'action' : action,
+                    'book_id' : button.parent().data('bookId'),
+                    'action' : button.data('action'),
                     'date': $('.datetimepicker').val()
                 },
                 dataType: 'json',
                 success: function (data) {
                     if (data.success) {
                         $('.popover-trigger').popover('hide');
+                        toggleButtonAction(button);
                         showAlert('The book successfully marked as read');
                     } else if (data.message) {
                         $('.popover-trigger').popover('hide');
@@ -90,6 +91,7 @@
                 }       
             });
         }
+        
     });
     </script>
 {% endblock %}

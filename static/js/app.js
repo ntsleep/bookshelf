@@ -9,3 +9,35 @@ function alertTimeout(wait) {
     }, wait);
 }
 
+function toggleButtonAction(button) {
+    var buttons = {
+        'want-to-read' : {
+            'off' : 'Want to read',
+            'on' : "Don't want to read",
+        },
+        'currently-reading' : {
+            'off' : 'Currently reading',
+            'on' : "Don't read",
+        },
+        'read' : {
+            'off' : 'Read',
+            'on' : "Unread",
+        },
+        'like' : {
+            'off' : 'Like',
+            'on' : "Don't like",
+        },
+        'have' : {
+            'off' : 'Have',
+            'on' : "Don't have",
+        },
+    };
+
+    var old_status = button.data('actionStatus');
+    var new_status = (old_status === 'off') ? 'on' : 'off';
+    var new_text = buttons[button.data('action')][new_status]
+
+    button.attr('data-action-status', new_status);
+    button.text(new_text);
+}
+
