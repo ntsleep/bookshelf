@@ -9,7 +9,7 @@ function alertTimeout(wait) {
     }, wait);
 }
 
-function toggleButtonAction(button) {
+function setButtonText(button) {
     var buttons = {
         'want-to-read' : {
             'off' : 'Want to read',
@@ -32,13 +32,20 @@ function toggleButtonAction(button) {
             'on' : "Don't have",
         },
     };
+    
+    var status = button.data('actionStatus');
+    var text = buttons[button.data('action')][status]
+    
+    button.text(text);
+}
 
+function toggleButtonAction(button) {
     var old_status = button.data('actionStatus');
     var new_status = (old_status === 'off') ? 'on' : 'off';
-    var new_text = buttons[button.data('action')][new_status]
-
+    
     button.attr('data-action-status', new_status);
     button.data('actionStatus', new_status);
-    button.text(new_text);
+    
+    setButtonText(button)
 }
 
