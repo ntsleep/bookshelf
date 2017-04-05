@@ -38,16 +38,21 @@ def mark(request):
     
     action_date = request.POST['date'] if request.POST['date'] else datetime.date.today()
 
-    shelf, created = Shelf.objects.get_or_create(
-        user = current_user,
-        book = book,
-        action = request.POST['action'],
-        defaults={'date': action_date}
-    )
+    if request.POST['current_status'] == 'off':
+        shelf, created = Shelf.objects.get_or_create(
+            user = current_user,
+            book = book,
+            action = request.POST['action'],
+            defaults={'date': action_date}
+        )
+    else:
+        Shelf.objects.filter(
+            user = current_user,
+            book = book,
+            action = request.POST['action'],
+        ).delete()
     
     data = {
-        'shelf' : shelf.id,
-        'new' : created,
         'user' : "{}".format(current_user.username),
         'success' : 1 
     }
