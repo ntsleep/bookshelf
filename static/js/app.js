@@ -38,6 +38,7 @@ function toggleButtonAction(button) {
     var new_text = buttons[button.data('action')][new_status]
 
     button.attr('data-action-status', new_status);
+    button.data('actionStatus', new_status);
     button.text(new_text);
 }
 

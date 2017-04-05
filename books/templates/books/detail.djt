@@ -69,6 +69,7 @@
                 data: {
                     'book_id' : button.parent().data('bookId'),
                     'action' : button.data('action'),
+                    'current_status' : button.data('actionStatus'),
                     'date': $('.datetimepicker').val()
                 },
                 dataType: 'json',
