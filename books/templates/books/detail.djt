@@ -76,8 +76,9 @@
                 success: function (data) {
                     if (data.success) {
                         $('.popover-trigger').popover('hide');
+                        var action = button.text();
                         toggleButtonAction(button);
-                        showAlert('The book successfully marked as read');
+                        showAlert("The book's status successfully changed to " + action );
                     } else if (data.message) {
                         $('.popover-trigger').popover('hide');
                         $.each(data.message, function(index, value) {
