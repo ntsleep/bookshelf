@@ -1,15 +1,17 @@
 {% extends 'base.djt' %}
 
+{% load filters %}
+
 {% block content %}
     <div class="container">  
         <h1>{{ book.title }}</h1>
         <div id="alert_placeholder"></div>
         <div class="popover-markup buttonset" data-book-id="{{ book.id }}">
-            <a href="#" class="direct-action btn btn-success" data-action="want-to-read" data-action-status="off">Want to read</a>
-            <a href="#" class="direct-action btn btn-success" data-action="currently-reading" data-action-status="off">Currently reading</a>
-            <a href="#" class="popover-trigger btn btn-success" data-action="read" data-action-status="off">Read</a>
-            <a href="#" class="direct-action btn btn-success" data-action="like" data-action-status="off">Like</a>
-            <a href="#" class="direct-action btn btn-success" data-action="have" data-action-status="off">Have</a>
+            <a href="#" class="direct-action btn btn-success" data-action="want-to-read" data-action-status="{{ book|get_book_action_status:"want-to-read" }}">Want to read</a>
+            <a href="#" class="direct-action btn btn-success" data-action="currently-reading" data-action-status="{{ book|get_book_action_status:"currently-reading" }}">Currently reading</a>
+            <a href="#" class="popover-trigger btn btn-success" data-action="read" data-action-status="{{ book|get_book_action_status:"read" }}">Read</a>
+            <a href="#" class="direct-action btn btn-success" data-action="like" data-action-status="{{ book|get_book_action_status:"like" }}">Like</a>
+            <a href="#" class="direct-action btn btn-success" data-action="have" data-action-status="{{ book|get_book_action_status:"have" }}">Have</a>
             
             <div class="content hide">
                 <div class="row">
