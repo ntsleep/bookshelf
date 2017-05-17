@@ -1,29 +1,41 @@
 {% extends 'base.djt' %}
 
 {% block content %}
-<div class="container">  
+    <div class="container">  
+        <h1>{{ author }}</h1>
+        <div class="row">
+            {% if author.photo %}
+                <div class="col-md-4">
+                    <img src="{{ author.photo.url }}" class="img-responsive" />
+                </div>
+            {% endif %}
+            <div class="col-md-8">
+                
 
-    <h1>{{ author }}</h1>
- 
-    <p>{{ author.biography }}</p>
-{#    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>#}
-   
-    <h3>Books:</h3>
-    {% if grouped_books %}
-        <ul class="list-group">
-            {% for group, books in grouped_books.items %}
-                <li class="list-group-item">{{ group }}
+                <p>{{ author.biography }}</p>
+            </div>
+        </div>
+
+        {#    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>#}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Books:</h3>
+                {% if grouped_books %}
                     <ul class="list-group">
-                        {% for book in books %}
-                            <li class="list-group-item"><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+                        {% for group, books in grouped_books.items %}
+                            <li class="list-group-item">{{ group }}
+                                <ul class="list-group">
+                                    {% for book in books %}
+                                        <li class="list-group-item"><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+                                        {% endfor %}
+                                </ul>
+                            </li>
                         {% endfor %}
                     </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No series are available.</p>
-    {% endif %}
-    
-</div><!-- /.container -->
+                {% else %}
+                    <p>No series are available.</p>
+                {% endif %}
+            </div>
+        </div>  
+    </div><!-- /.container -->
 {% endblock %}
