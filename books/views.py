@@ -2,8 +2,10 @@ import collections
 
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.urls import reverse
 from django.views import generic
+from django.conf import settings
 
 
 from .models import Book, Author
@@ -27,6 +29,11 @@ class DetailView(generic.DetailView):
         Get book.
         """
         return Book.objects
+    
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['media'] = repr(settings.MEDIA_ROOT)
+        return context
     
     
 class AuthorsListView(generic.ListView):

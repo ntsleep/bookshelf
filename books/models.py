@@ -8,6 +8,7 @@ class Author(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     biography = models.TextField(blank=True)
     created_at = models.DateTimeField('date published', auto_now_add=True)
+    photo = models.ImageField(upload_to='authors', null=True, blank=True)
     pass
 
     def __str__(self):
@@ -35,6 +36,7 @@ class Book(models.Model):
     pub_date = models.DateField(null=True, blank=True)
     isbn = models.CharField(max_length=20, blank=True)
     created_at = models.DateTimeField('date published', auto_now_add=True)
+    image = models.ImageField(upload_to='books', default='/media/books/default.jpeg')
     
     def __str__(self):
         return self.title
