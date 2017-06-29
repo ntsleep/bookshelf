@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'shelf.apps.ShelfConfig',
     'bootstrap3',
     'debug_toolbar',
-    'bootstrap_admin', # always before django.contrib.admin
+#    'bootstrap_admin', # always before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
+#BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
 WSGI_APPLICATION = 'bookshelf.wsgi.application'
 
