@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^books/', include('books.urls', namespace="books")),
     url(r'^shelf/', include('shelf.urls', namespace="shelf")),
     url(r'^admin/', admin.site.urls),
+    url(r'^admin_tools/', include('admin_tools.urls')),
 ]
 
 if settings.DEBUG:
