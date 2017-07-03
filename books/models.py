@@ -25,10 +25,26 @@ class Series(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Genre(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+class Form(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name
 
 class Book(models.Model):
     authors = models.ManyToManyField(Author, blank=True, related_name='books')
     series = models.ManyToManyField(Series, blank=True, related_name='books')
+    genres = models.ManyToManyField(Genre, blank=True, related_name='books')
+    form = models.ForeignKey(Form, null=True, unique=False)
     title = models.CharField(max_length=255)
     title_orig = models.CharField(max_length=255)
     teaser = models.CharField(max_length=500, blank=True)
@@ -40,4 +56,4 @@ class Book(models.Model):
     
     def __str__(self):
         return self.title
-
+    
