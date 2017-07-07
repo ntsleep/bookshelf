@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^books/', include('books.urls', namespace="books")),
     url(r'^shelf/', include('shelf.urls', namespace="shelf")),
+    url(r'^parser/', include('bookparser.urls', namespace="bookparser")),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^admin/', admin.site.urls),
 

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'books.apps.BooksConfig',
     'shelf.apps.ShelfConfig',
+    'bookparser.apps.BookparserConfig',
     'bootstrap3',
     'debug_toolbar',
 #    'bootstrap_admin', # always before django.contrib.admin
