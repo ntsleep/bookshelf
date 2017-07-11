@@ -18,7 +18,7 @@ def parse_url(request):
     url = "https://fantlab.ru/work4065" #Роберт Асприн, Линда Эванс «Разведчики времени»
 
     # Getting main data from the page
-    success, encoding, book = fetch_data(url)
+    success, encoding, book = fetch_book_data(url)
 
 
     
@@ -30,9 +30,10 @@ def parse_url(request):
     
     return JsonResponse(args)
 
-def fetch_data(url):
+    
+def fetch_book_data(url):
     """Loads HTML data by URL;
-    Returns success, title, encoding, H1"""
+    Returns success, encoding, parsed elements"""
     
     
     try:
@@ -51,14 +52,24 @@ def fetch_data(url):
         title = title_tag.string
         title_orig = title_tag.parent.findNext('p').string
         
-        genre = soup.find(text = re.compile('Жанры')) #.parent
+        genre_box = soup.find(text = re.compile('Жанры')).parent
+        genres = [genre.string for genre in genre_box.findAll("a",recursive=False)]
 
+        translator = soup.find("a", {"href" : re.compile('translator')}).text
+        
+        publication_date = soup.find("span", {"itemprop" : "datePublished"}).text
+        
+        series_box = soup.find(text = re.compile('Входит в')).parent.findNext('div')
+        seriess = [series.string for series in series_box.findAll('a')]
         
         elements = {
             'title': title,
             'title_orig': title_orig,
             'authors': authors,
-            'genre': genre,
+            'translator': translator,
+            'genre': genres,
+            'publication_date': publication_date,
+            'seriess': seriess,
             'description': description,
             
         }
