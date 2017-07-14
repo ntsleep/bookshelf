@@ -7,7 +7,7 @@ import locale
 
 class FantlabParser():
     
-    def fetch_author_data(url):
+    def fetch_author_data(self, url):
         """Loads author data by URL;
         Returns success, encoding, parsed elements"""
 
@@ -24,13 +24,8 @@ class FantlabParser():
             name_orig_raw = name_raw[name_raw.find("(")+1 : name_raw.find(")")]
             name_orig, middle, surname_orig = name_orig_raw.partition(" ")
 
-            birth_date = soup.find("meta", {"itemprop" : "birthDate"}).findParent("td").text.strip()
-
-            locale.setlocale(locale.LC_TIME, "ru_RU.utf8") #17 марта 1948 г.
-            d = {'января': 'январь', 'марта': 'март', 'декабря': 'декабрь'}
-            for k, v in d.items():
-                birth_date = birth_date.replace(k, v)
-            birth_date_obj = datetime.strptime(birth_date , '%d %B %Y г.')
+            birth_date_raw = soup.find("meta", {"itemprop" : "birthDate"}).findParent("td").text.strip()
+            birth_date = self.convert_birth_date(birth_date_raw)
 
             raw_biography = soup.find("div", {"class" : "person-info-bio"})
             biography = ("".join(bio.text for bio in raw_biography.findChildren()))
@@ -43,7 +38,7 @@ class FantlabParser():
                 'surname': surname,
                 'name_orig': name_orig,
                 'surname_orig': surname_orig,
-                'birth_date': birth_date_obj,
+                'birth_date': birth_date,
                 'biography': biography,
                 'photo':photo,
 
@@ -55,7 +50,7 @@ class FantlabParser():
             print ("ERROR: can`t open URL: %s with error %s" % (url, e))
             return False, "", [e]
         
-    def fetch_book_data(url):
+    def fetch_book_data(self, url):
         """Loads HTML data by URL;
         Returns success, encoding, parsed elements"""
 
@@ -103,4 +98,27 @@ class FantlabParser():
         except Exception as e:
             print ("ERROR: can`t open URL: %s with error %s" % (url, e))
             return False, "", [e]
+        
+    def convert_birth_date(self, birth_date_raw):
+        locale.setlocale(locale.LC_TIME, "ru_RU.utf8")
+            
+        d = {
+            'января': 'январь', 
+            'февраля': 'февраль', 
+            'марта': 'март', 
+            'апреля': 'апрель', 
+            'мая': 'май', 
+            'июня': 'июнь', 
+            'июля': 'июль', 
+            'августа': 'август', 
+            'сентября': 'сентябрь', 
+            'октября': 'октябрь', 
+            'ноября': 'ноябрь', 
+            'декабря': 'декабрь'
+            }
+
+        for k, v in d.items():
+            birth_date_raw = birth_date_raw.replace(k, v)
+            
+        return datetime.strptime(birth_date_raw , '%d %B %Y г.')
     
