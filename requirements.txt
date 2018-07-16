@@ -1,2 +1,6 @@
+django
+Pillow
+django-debug-toolbar # https://django-debug-toolbar.readthedocs.io/en/stable/installation.html
 django-bootstrap3
-django-debug-toolbar - https://django-debug-toolbar.readthedocs.io/en/stable/installation.html
+django-jet
+beautifulsoup4
