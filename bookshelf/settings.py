@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,7 +34,7 @@ INSTALLED_APPS = [
     'bookparser.apps.BookparserConfig',
     'bootstrap3',
     'debug_toolbar',
-#    'bootstrap_admin', # always before django.contrib.admin
+    #    'bootstrap_admin', # always before django.contrib.admin
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -79,10 +77,9 @@ TEMPLATES = [
     },
 ]
 
-#BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
+# BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
 WSGI_APPLICATION = 'bookshelf.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -93,7 +90,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -113,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -127,7 +122,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#base paths
+# base paths
 SETTINGS_DIR = os.path.dirname(os.path.realpath(__file__))
 BUILDOUT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, '..'))
 
@@ -138,9 +133,8 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'),
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),
                     os.path.join('static'),)
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
