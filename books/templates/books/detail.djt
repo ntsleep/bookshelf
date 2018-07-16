@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.container -->
+    </div>
 {% endblock %}
 
 {% block javascript %}
