@@ -19,9 +19,9 @@
                 {% for book in latest_books_list %}
                     <tr>
                         <td><a href="{% url 'books:author_detail' book.authors.first.id %}">{{ book.authors.all|join:", " }}</a></td>
-                        <td><a href="/books/{{ book.id }}/">{{ book.title }}</a></td>
-                        <td><a href="/books/{{ book.id }}/">{{ book.series.all|join:", " }}</a></td>
-                        <td><a href="/books/{{ book.id }}/">{{ book.created_at }}</a></td>
+                        <td><a href="{% url 'books:detail' book.id %}">{{ book.title }}</a></td>
+                        <td><a href="{% url 'books:detail' book.id %}">{{ book.series.all|join:", " }}</a></td>
+                        <td><a href="{% url 'books:detail' book.id %}">{{ book.created_at }}</a></td>
                     </tr>
                 {% endfor %}
             <tbody>
