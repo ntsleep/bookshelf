@@ -33,8 +33,6 @@ INSTALLED_APPS = [
     'shelf.apps.ShelfConfig',
     'bookparser.apps.BookparserConfig',
     'bootstrap3',
-    'debug_toolbar',
-    #    'bootstrap_admin', # always before django.contrib.admin
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
