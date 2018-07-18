@@ -17,8 +17,10 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.djt'), name='home'),
     url(r'^books/', include(('books.urls', 'books'), namespace="books")),
     url(r'^shelf/', include(('shelf.urls', 'shelf'), namespace="shelf")),
     url(r'^parser/', include(('bookparser.urls', 'bookparser'), namespace="bookparser")),
