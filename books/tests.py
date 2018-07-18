@@ -31,3 +31,21 @@ class BooksIndexViewTests(TestCase):
             response.context['latest_books_list'],
             ['<Book: Test>']
         )
+
+
+class BooksDetailViewTests(TestCase):
+    def test_not_existing_book(self):
+        """
+        If the book doesn't exist returns page 404
+        """
+        response = self.client.get(reverse('books:detail', args=(1,)))
+        self.assertEqual(response.status_code, 404)
+
+    def test_existing_book(self):
+        """
+        The detail view of the book
+        """
+        book = create_book(title="Test", title_orig="Test orig")
+        response = self.client.get(reverse('books:detail', args=(book.id,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, book.title)
