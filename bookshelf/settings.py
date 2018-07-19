@@ -29,10 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'books.apps.BooksConfig',
-    'shelf.apps.ShelfConfig',
-    'bookparser.apps.BookparserConfig',
-    'bootstrap3',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'bootstrap3',
+
+    'books.apps.BooksConfig',
+    'shelf.apps.ShelfConfig',
+    'bookparser.apps.BookparserConfig',
 ]
 
 if DEBUG:
