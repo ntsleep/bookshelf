@@ -66,10 +66,10 @@ class Form(models.Model):
 
 
 class Book(models.Model):
-    authors = models.ManyToManyField(Author, blank=True, related_name='books')
-    translators = models.ManyToManyField(Translator, blank=True, related_name='books')
-    series = models.ManyToManyField(Series, blank=True, related_name='books')
-    genres = models.ManyToManyField(Genre, blank=True, related_name='books')
+    authors = models.ManyToManyField(Author, blank=True)
+    translators = models.ManyToManyField(Translator, blank=True)
+    series = models.ManyToManyField(Series, blank=True)
+    genres = models.ManyToManyField(Genre, blank=True)
     form = models.ForeignKey(Form, null=True, unique=False, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     title_orig = models.CharField(max_length=255)

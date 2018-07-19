@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.urls import reverse
 from django.views import generic
 
 from bookparser.parsers.fantlab import FantlabParser
@@ -23,6 +24,9 @@ class AuthorCreate(generic.edit.CreateView):
             return initial
         else:
             return {}
+
+    def get_success_url(self):
+        return reverse('books:authors_list')
 
 
 def parse_url(request):
