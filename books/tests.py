@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from books.models import Book
+from books.models import Book, Author
 
 
 def create_book(title, title_orig):
@@ -9,6 +9,13 @@ def create_book(title, title_orig):
     Create a simple book with title and original title.
     """
     return Book.objects.create(title=title, title_orig=title_orig)
+
+
+def create_author(name, name_orig, surname, surname_orig):
+    """
+    Create a simple book with title and original title.
+    """
+    return Author.objects.create(name=name, name_orig=name_orig, surname=surname, surname_orig=surname_orig)
 
 
 class BooksIndexViewTests(TestCase):
@@ -49,3 +56,25 @@ class BooksDetailViewTests(TestCase):
         response = self.client.get(reverse('books:detail', args=(book.id,)))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, book.title)
+
+
+class AuthorsIndexViewTests(TestCase):
+    def test_no_authors(self):
+        """
+        If no authors exist, an appropriate message is displayed.
+        """
+        response = self.client.get(reverse('books:authors_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "No authors are available.")
+        self.assertQuerysetEqual(response.context['authors_list'], [])
+
+    def test_authors_exist(self):
+        """
+        List of authors.
+        """
+        create_author(name="A", name_orig="A", surname="Test", surname_orig="Test orig")
+        response = self.client.get(reverse('books:authors_list'))
+        self.assertQuerysetEqual(
+            response.context['authors_list'],
+            ['<Author: A Test>']
+        )
