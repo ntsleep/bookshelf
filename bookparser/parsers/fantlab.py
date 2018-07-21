@@ -30,7 +30,8 @@ class FantlabParser:
             biography = ("".join(bio.text for bio in raw_biography.findChildren()))
 
             img = raw_biography.find("img")
-            photo = img['src']
+
+            photo = img.get('img') if img else None
 
             elements = {
                 'name': name,
@@ -102,4 +103,7 @@ class FantlabParser:
     def convert_birth_date(birth_date_raw):
         locale.setlocale(locale.LC_TIME, "ru_RU.utf8")
 
-        return datetime.strptime(birth_date_raw, '%d %B %Y г.')
+        try:
+            return datetime.strptime(birth_date_raw, '%d %B %Y г.')
+        except ValueError:
+            return ""
