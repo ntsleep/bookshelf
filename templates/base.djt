@@ -34,6 +34,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'books:index' %}">Books</a></li>
                     <li><a href="{% url 'books:authors_list' %}">Authors</a></li>
+                    <li><a href="{% url 'bookparser:add_source' %}">Parse source</a></li>
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Adminpanel</a></li>
                     {% endif %}
