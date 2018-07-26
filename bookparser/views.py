@@ -15,10 +15,7 @@ class AuthorCreate(CreateView):
         url = self.request.GET.get("url")
         success, encoding, initial = FantlabParser().fetch_author_data(url)
 
-        if success:
-            return initial
-        else:
-            return {}
+        return initial if success else {}
 
     def get_success_url(self):
         return reverse('books:authors_list')
