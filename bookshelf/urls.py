@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^books/', include(('books.urls', 'books'), namespace="books")),
     url(r'^shelf/', include(('shelf.urls', 'shelf'), namespace="shelf")),
     url(r'^parser/', include(('bookparser.urls', 'bookparser'), namespace="bookparser")),
-    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    # url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^admin/', admin.site.urls),
 
 ]
