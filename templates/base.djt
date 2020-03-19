@@ -1,57 +1,67 @@
 {% load static %}<!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}Bookshelf{% endblock %}</title>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Bookshelf{% endblock %}</title>
 
-        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
-        {# Load the tag library #}
-        {% load bootstrap3 %}
+    {# Load the tag library #}
+    {% load bootstrap4 %}
 
-        {# Load CSS and JavaScript #}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="{% static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
 
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
-    </head>
-    <body>
-        <header>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<header>
 
-        </header>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'home' %}">Bookshelf</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="{% url 'books:index' %}">Books</a></li>
-                    <li><a href="{% url 'books:authors_list' %}">Authors</a></li>
-                    <li><a href="{% url 'bookparser:add_source' %}">Parse source</a></li>
-                    {% if user.is_superuser %}
-                        <li><a href="{% url 'admin:index' %}">Adminpanel</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-        {# Display django.contrib.messages as Bootstrap alerts #}
-        {% bootstrap_messages %}
+</header>
 
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
-        <footer>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        </footer>
-        {% block javascript %}{% endblock %}
-    </body>
+    <a class="navbar-brand mb-0 h1" href="{% url 'home' %}">Bookshelf</a>
+    </div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'books:index' %}">Books</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'books:authors_list' %}">Authors</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'bookparser:add_source' %}">Parse source</a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Adminpanel</a>
+        </li>
+        {% endif %}
+    </ul>
+
+</nav>
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<main>
+    <div class="container-fluid p-5">
+    {% block content %}
+    {% endblock %}
+    </div>
+</main>
+<footer>
+
+</footer>
+{% block javascript %}{% endblock %}
+</body>
 </html>
 

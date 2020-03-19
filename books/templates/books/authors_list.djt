@@ -1,32 +1,30 @@
 {% extends 'base.djt' %}
 
 {% block content %}
-<div class="container">  
+<h2>Authors</h2>
 
-    <h2>Authors</h2>
-
-    {% if authors_list %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Original name</th>
-                    <th>Added</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for author in authors_list %}
-                    <tr>
-                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author }}</a></td>
-                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author.name_orig }} {{ author.surname_orig }}</a></td>
-                        <td><a href="{% url 'books:author_detail' author.id %}">{{ author.created_at }}</a></td>
-                    </tr>
-                {% endfor %}
-            <tbody>
-        </table>
-    {% else %}
-        <p>No authors are available.</p>
-    {% endif %}
-</div>
+{% if authors_list %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Original name</th>
+            <th>Added</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for author in authors_list %}
+            <tr>
+                <td><a href="{% url 'books:author_detail' author.id %}">{{ author }}</a></td>
+                <td><a href="{% url 'books:author_detail' author.id %}">{{ author.name_orig }} {{ author.surname_orig }}</a>
+                </td>
+                <td><a href="{% url 'books:author_detail' author.id %}">{{ author.created_at }}</a></td>
+            </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+{% else %}
+    <p>No authors are available.</p>
+{% endif %}
 {% endblock %}
 

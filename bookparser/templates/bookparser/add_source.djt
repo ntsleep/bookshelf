@@ -1,18 +1,16 @@
 {% extends 'base.djt' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
-<div class="container">
-    <div class="col-md-12">
-        <form action="{% url 'bookparser:author_create' %}" method="get" class="form">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">
-                    Import
-                </button>
-            {% endbuttons %}
-        </form>
-    </div>
+<div class="col-md-12">
+    <form action="{% url 'bookparser:author_create' %}" method="get" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Import
+            </button>
+        {% endbuttons %}
+    </form>
 </div>
 {% endblock %}
